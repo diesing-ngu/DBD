@@ -1,4 +1,4 @@
-# Drybulk density
+# Dry bulk density
 R scripts for the spatial prediction of dry bulk density (DBD) of surface sediments.
 ### Main characteristics
 
