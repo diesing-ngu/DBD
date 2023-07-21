@@ -8,7 +8,6 @@ output: html_notebook
 ```{r packages, message=FALSE}
 rm(list=ls())
 
-library(raster)
 library(terra)
 library(dplyr)
 library(rcompanion)
@@ -54,7 +53,7 @@ The variable 'date' specifies the date when the files of the data preparation st
 *Note: The name of the DBD prediction of the sediment interval above needs to be added manually.*
 
 ```{r load_data}
-date <- "2023-07-18"
+date <- "2023-07-21"
 
 predictors <- rast("input/predictors.tif")
 
@@ -206,7 +205,7 @@ for (i in sel_preds[2:length(sel_preds)]) {
 
 Distances in environmental (feature) space are computed.
 
-```{r env_space_dist}
+```{r env_space_dist, message=FALSE}
 dist_env <- plot_geodist(st_as_sf(DBD), predictors,
                      type = "feature",
                      variables = sel_preds,
@@ -319,7 +318,7 @@ Roberts et. al. (2017) suggest that blocks should be substantially bigger than t
 
 ```{r spatial_blocks}
 k <- 10 # Number of folds
-m <- 4 # Multiplier applied to block size
+m <- 3.5 # Multiplier applied to block size
 
 spBlocks <- cv_spatial(x = DBD_pr,
                        k = k,
@@ -500,7 +499,7 @@ m2 <- model$finalModel
 class(m2) <- "randomForest"
 
 for (i in 1:length(sel_preds)) {
-  partialPlot(x = m2, pred.data = seldata, x.var = sel_preds[i], main = "", xlab = sel_preds[i], ylab = "DBD (g/cm^3")
+  partialPlot(x = m2, pred.data = seldata, x.var = sel_preds[i], main = "", xlab = sel_preds[i], ylab = "DBD (g/cm^3)")
 }
 
 ```
