@@ -35,7 +35,6 @@ library(forcats)
 ## Which sediment depth interval?
 
 0: 0 - 10 cm
-10: 10 - 30 cm
 
 ```{r depth_interval}
 # upper limit
