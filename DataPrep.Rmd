@@ -14,7 +14,6 @@ rm(list=ls())
 
 library(sf)
 library(dplyr)
-library(stars)
 library(terra)
 ```
 
@@ -105,8 +104,6 @@ min_ext <- sum(predictors)
 min_ext[min_ext == 0] <- NA
 fishnet <- st_as_sf(stars::st_as_stars(min_ext), as_points = FALSE, merge = FALSE)
 fishnet$ID <- 1:nrow(fishnet)
-
-#write_sf(fishnet, dsn = "input", layer = "fishnet", driver = "ESRI Shapefile")
 ```
 
 
@@ -213,16 +210,16 @@ writeRaster(predictors, "input/predictors.tif", overwrite = TRUE)
 
 
 ```{r save_0-10cm}
-write_sf(DBD0, dsn = "input", layer = paste0("DBD0_", Sys.Date()), driver = "ESRI Shapefile")
+write_sf(DBD0, dsn = "input", layer = "DBD0", driver = "ESRI Shapefile")
 ```
 
 
 ```{r save_depth_intervals}
-#write_sf(DBD0, dsn = "input", layer = paste0("DBD0_", Sys.Date()), driver = "ESRI Shapefile")
-#write_sf(DBD5, dsn = "input", layer = paste0("DBD5_", Sys.Date()), driver = "ESRI Shapefile")
-#write_sf(DBD15, dsn = "input", layer = paste0("DBD15_", Sys.Date()), driver = "ESRI Shapefile")
-#write_sf(DBD30, dsn = "input", layer = paste0("DBD30_", Sys.Date()), driver = "ESRI Shapefile")
-#write_sf(DBD60, dsn = "input", layer = paste0("DBD60_", Sys.Date()), driver = "ESRI Shapefile")
+#write_sf(DBD0, dsn = "input", layer = "DBD0", driver = "ESRI Shapefile")
+#write_sf(DBD5, dsn = "input", layer = "DBD5", driver = "ESRI Shapefile")
+#write_sf(DBD15, dsn = "input", layer = "DBD15", driver = "ESRI Shapefile")
+#write_sf(DBD30, dsn = "input", layer = "DBD30", driver = "ESRI Shapefile")
+#write_sf(DBD60, dsn = "input", layer = "DBD60", driver = "ESRI Shapefile")
 ```
 
 
