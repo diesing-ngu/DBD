@@ -47,13 +47,11 @@ dl <- 10
 
 ## Load required data
 
-The variable 'date' specifies the date when the files of the data preparation step were written to the disk.
+If more than one sediment depth interval is predicted, it might be useful to use the prediction of the uppermost layer as a predictor.
 
 *Note: The name of the DBD prediction of the sediment interval above needs to be added manually.*
 
 ```{r load_data}
-date <- "2023-07-21"
-
 predictors <- rast("input/predictors.tif")
 
 if(du != 0){
@@ -63,7 +61,7 @@ if(du != 0){
   rm(DBDabove)
 } 
 
-DBD <- read_sf(paste0("input/DBD", du, "_", date, ".shp"))
+DBD <- read_sf(paste0("input/DBD", du, ".shp"))
 DBD <- vect(DBD)
 
 names(predictors)
