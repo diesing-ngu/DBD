@@ -99,6 +99,8 @@ plot(predictors)
 
 ## Create a fishnet based on predictor raster
 
+A spatial polygons file is created. It consists of one square for every grid cell. It will be used later in the process to create centroids which hold the mean value of the sedimentation rate measurements.
+
 ```{r fishnet}
 min_ext <- sum(predictors)
 min_ext[min_ext == 0] <- NA
@@ -140,8 +142,6 @@ if (st_crs(DBD)$proj4string != crs) {
 ## Sample depth intervals
 
 Define breaks in sample depth to create depth intervals. Note that depth is given in cm and as a positive number here.
-
-It has become an unofficial standard to use the upper 10 cm of the sediment column.
 
 ```{r depth_intervals}
 brks <- c(0, 10)
@@ -206,15 +206,9 @@ DBD0 <- st_centroid(DBD_centroids)
 
 ```{r save_predictors}
 writeRaster(predictors, "input/predictors.tif", overwrite = TRUE)
-```
-
-
-```{r save_0-10cm}
+writeVector(AoI, "input/AoI.shp")
 write_sf(DBD0, dsn = "input", layer = "DBD0", driver = "ESRI Shapefile")
-```
 
-
-```{r save_depth_intervals}
 #write_sf(DBD0, dsn = "input", layer = "DBD0", driver = "ESRI Shapefile")
 #write_sf(DBD5, dsn = "input", layer = "DBD5", driver = "ESRI Shapefile")
 #write_sf(DBD15, dsn = "input", layer = "DBD15", driver = "ESRI Shapefile")
